@@ -3,10 +3,10 @@ package cf.jammy.mangodude.entity;
 import cf.jammy.mangodude.MangoDude;
 import processing.core.PImage;
 
-public class ImageButton extends Clickable {
+public class ImageButton extends Entity implements Clickable {
     private PImage img;
 
-    public ImageButton(boolean f, MangoDude g, PImage img, int x, int y) {
+    public ImageButton(boolean f, MangoDude g, PImage img, float x, float y) {
         super(f, g);
         this.img = img;
         this.x = x;
@@ -21,9 +21,14 @@ public class ImageButton extends Clickable {
         getGame().image(img, x, y);
     }
 
-    @Override
     public boolean isTouching(float x, float y) {
         return x > this.x && x < this.x + img.width &&
                 y > this.y && y < this.y + img.height;
     }
+
+    public boolean isDisabled() {
+        return false;
+    }
+
+    public void onClick() {}
 }

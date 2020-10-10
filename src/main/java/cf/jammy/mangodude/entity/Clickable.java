@@ -1,25 +1,11 @@
 package cf.jammy.mangodude.entity;
 
-import cf.jammy.mangodude.MangoDude;
 
-public class Clickable extends Entity {
-    private boolean isDisabled = false;
+public interface Clickable {
 
-    public Clickable(boolean f, MangoDude g) {
-        super(f, g);
-    }
+    boolean isTouching(float x, float y);
 
-    public boolean isTouching(float x, float y) {
-        return true;
-    }
+    void onClick();
 
-    public void onClick(){}
-
-    public boolean isDisabled() {
-        return isDisabled;
-    }
-
-    public void setDisabled(boolean disabled) {
-        isDisabled = disabled;
-    }
+    boolean isDisabled();
 }

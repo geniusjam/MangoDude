@@ -2,10 +2,12 @@ package cf.jammy.mangodude;
 
 import cf.jammy.mangodude.entity.Clickable;
 import cf.jammy.mangodude.entity.Entity;
+import cf.jammy.mangodude.entity.Floor;
 import cf.jammy.mangodude.entity.ImageButton;
 import cf.jammy.mangodude.entity.TextEntity;
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
+import processing.core.PImage;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -42,6 +44,9 @@ public class MangoDude extends PApplet {
                 frame.dispose();
             }
         };
+
+        PImage floorImg = Main.getImg("floor.png");
+        new Floor(this, floorImg, 0, height - floorImg.height);
     }
 
     public void mouseClicked(){
