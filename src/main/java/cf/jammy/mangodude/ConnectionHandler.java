@@ -60,7 +60,7 @@ public class ConnectionHandler {
                 e.printStackTrace();
             }
         }).on("authed", (Object... args) -> {
-            System.out.println("Authorization complete.");
+            System.out.println("Authentication complete.");
             user = (JSONObject) args[0];
             Main.start();
         }).on("authfail", (Object... args) -> {
