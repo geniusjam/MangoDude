@@ -1,10 +1,14 @@
 package cf.jammy.mangodude;
 
 import cf.jammy.mangodude.entity.Clickable;
+import cf.jammy.mangodude.entity.Controller;
 import cf.jammy.mangodude.entity.Entity;
 import cf.jammy.mangodude.entity.Floor;
 import cf.jammy.mangodude.entity.ImageButton;
+import cf.jammy.mangodude.entity.KeyboardListener;
+import cf.jammy.mangodude.entity.Player;
 import cf.jammy.mangodude.entity.TextEntity;
+import org.w3c.dom.Text;
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -16,6 +20,8 @@ import java.util.List;
 public class MangoDude extends PApplet {
 
     public List<Entity> entities = new LinkedList<>();
+
+    private Player self = null;
 
     private float cameraX;
     private float cameraY;
@@ -47,6 +53,28 @@ public class MangoDude extends PApplet {
 
         PImage floorImg = Main.getImg("floor.png");
         new Floor(this, floorImg, 0, height - floorImg.height);
+
+        self = new Player(false, this, width/2 - Player.img.width/2, height - floorImg.height - Player.img.height) {
+            @Override
+            public void render(float x, float y) {
+                super.render(x, y);
+                if(x <= 20) {
+                    cameraX -= 50;
+                } else if(x >= width - 20) {
+                    cameraX += 50;
+                }
+            }
+        };
+
+        new Controller(this, self);
+
+        new TextEntity(true, this, "x: y:", 0, 30) {
+            @Override
+            protected void render(float x, float y) {
+                this.setText("x: " + self.getX() + " y: " + self.getY());
+                super.render(width - textWidth(getText()), y);
+            }
+        }.setColor(0x000000);
     }
 
     public void mouseClicked(){
@@ -55,7 +83,16 @@ public class MangoDude extends PApplet {
                 ((Clickable) e).onClick();
     }
 
+    public void keyReleased(){
+        for(Entity e : entities)
+            if(e instanceof KeyboardListener)
+                ((KeyboardListener) e).onKeyUp(key, keyCode);
+    }
+
     public void keyPressed(){
+        for(Entity e : entities)
+            if(e instanceof KeyboardListener)
+                ((KeyboardListener) e).onKeyDown(key, keyCode);
         if(keyCode == LEFT)  {
             cameraX -= 10;
         }
@@ -75,17 +112,17 @@ public class MangoDude extends PApplet {
         fill(0, 0, 0);
 
         for(Entity entity : entities) {
-            if(entity.isTouching(cameraX, cameraY, width, height)) entity.update();
+            entity.update();
         }
 
         for(Entity entity : entities) {
-            if(entity.isTouching(cameraX, cameraY, width, height)) entity.show();
+            if(entity.isFixed() || entity.isTouching(cameraX, cameraY, width, height)) entity.show();
         }
     }
 
     private void setCameraCenter(float x, float y) {
-        cameraX = x-width/2;
-        cameraY = y+height/2;
+        cameraX = x - width/2;
+        cameraY = y + height/2;
     }
 
     public float getCameraX() {

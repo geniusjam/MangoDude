@@ -3,22 +3,18 @@ package cf.jammy.mangodude.entity;
 import cf.jammy.mangodude.MangoDude;
 import processing.core.PImage;
 
-public class ImageButton extends Entity implements Clickable {
-    private PImage img;
+public class ImageButton extends ImageEntity implements Clickable {
 
     public ImageButton(boolean f, MangoDude g, PImage img, float x, float y) {
-        super(f, g);
-        this.img = img;
-        this.x = x;
-        this.y = y;
+        super(f, g, img, x, y);
     }
 
     @Override
     protected void render(float x, float y) {
         getGame().noStroke();
-        getGame().fill(0x2d2d2d);
+        getGame().fill(30, 30, 30, 50);
         getGame().rect(x, y, img.width, img.height);
-        getGame().image(img, x, y);
+        super.render(x, y);
     }
 
     public boolean isTouching(float x, float y) {
