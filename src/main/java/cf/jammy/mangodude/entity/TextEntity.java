@@ -18,7 +18,6 @@ public class TextEntity extends Entity {
 
     @Override
     protected void render(float x, float y) {
-        getGame().stroke(color);
         getGame().fill(color);
         getGame().textSize(16);
         getGame().text(text, x, y);
