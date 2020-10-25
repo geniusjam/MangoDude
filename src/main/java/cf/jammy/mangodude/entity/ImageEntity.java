@@ -4,7 +4,7 @@ import cf.jammy.mangodude.MangoDude;
 import processing.core.PImage;
 
 public class ImageEntity extends Entity {
-    private PImage img;
+    protected PImage img;
 
     public ImageEntity(boolean f, MangoDude g, PImage img, float x, float y) {
         super(f, g);
@@ -15,8 +15,6 @@ public class ImageEntity extends Entity {
 
     @Override
     protected void render(float x, float y) {
-        getGame().noStroke();
-
         getGame().image(img, x, y);
     }
 
