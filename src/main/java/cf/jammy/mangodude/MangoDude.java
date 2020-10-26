@@ -4,11 +4,11 @@ import cf.jammy.mangodude.entity.Clickable;
 import cf.jammy.mangodude.entity.Controller;
 import cf.jammy.mangodude.entity.Entity;
 import cf.jammy.mangodude.entity.Floor;
+import cf.jammy.mangodude.entity.Holder;
 import cf.jammy.mangodude.entity.ImageButton;
 import cf.jammy.mangodude.entity.KeyboardListener;
 import cf.jammy.mangodude.entity.Player;
 import cf.jammy.mangodude.entity.TextEntity;
-import org.w3c.dom.Text;
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -26,6 +26,8 @@ public class MangoDude extends PApplet {
     private float cameraX;
     private float cameraY;
 
+    private Holder mangoes;
+
     public void settings(){
         size(1000, 700);
 
@@ -33,10 +35,6 @@ public class MangoDude extends PApplet {
     }
 
     public void setup(){
-        new TextEntity(true, this, "MangoDude", 0, 25)
-                .center(textWidth("MangoDude"))
-                .setColor(255);
-
         new ImageButton(true, this, Main.getImg("logout.png"), 0, 0) {
             @Override
             public void onClick() {
@@ -72,14 +70,18 @@ public class MangoDude extends PApplet {
             @Override
             protected void render(float x, float y) {
                 this.setText("x: " + self.getX() + " y: " + self.getY());
-                super.render(width - textWidth(getText()), y);
+                super.render(width - textWidth(getText())/2, y);
             }
         }.setColor(0x000000);
+
+        mangoes = new Holder(true, this, Main.getImg("mango.png"));
+        mangoes.setX(width / 2 - mangoes.calculateWidth() / 2);
+        mangoes.value = 20;
     }
 
     public void mouseClicked(){
         for(Entity e : entities)
-            if(e instanceof Clickable && ((Clickable) e).isTouching(mouseX, mouseY))
+            if(e instanceof Clickable && ((Clickable) e).isTouching(mouseX, mouseY) && !((Clickable) e).isDisabled())
                 ((Clickable) e).onClick();
     }
 
