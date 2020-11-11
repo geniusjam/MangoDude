@@ -10,11 +10,20 @@ public class ImageButton extends ImageEntity implements Clickable {
     }
 
     @Override
+    public void update() {}
+
+    @Override
     protected void render(float x, float y) {
         getGame().noStroke();
         getGame().fill(30, 30, 30, 50);
         getGame().rect(x, y, img.width, img.height);
         super.render(x, y);
+    }
+
+    @Override
+    public boolean isTouching(float x, float y, float w, float h) {
+        //TODO: Implement rectangle collision
+        return true;
     }
 
     public boolean isTouching(float x, float y) {

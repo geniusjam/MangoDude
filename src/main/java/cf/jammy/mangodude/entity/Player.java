@@ -42,4 +42,10 @@ public class Player extends Entity {
         else
             getGame().image(img, x, y);
     }
+
+    @Override
+    public boolean isTouching(float x, float y, float w, float h) {
+        //TODO: implement rectangle collision
+        return true;
+    }
 }

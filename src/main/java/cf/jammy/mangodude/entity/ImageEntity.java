@@ -14,8 +14,17 @@ public class ImageEntity extends Entity {
     }
 
     @Override
+    public void update() { }
+
+    @Override
     protected void render(float x, float y) {
         getGame().image(img, x, y);
+    }
+
+    @Override
+    public boolean isTouching(float x, float y, float w, float h) {
+        //TODO: Implement rectangle collision
+        return true;
     }
 
     public PImage getImg() {
