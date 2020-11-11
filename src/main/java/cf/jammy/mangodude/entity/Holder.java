@@ -14,6 +14,9 @@ public class Holder extends Entity {
     }
 
     @Override
+    public void update() {}
+
+    @Override
     public void render(float x, float y) {
         getGame().noStroke();
         getGame().ellipseMode(PConstants.CENTER);
@@ -25,6 +28,12 @@ public class Holder extends Entity {
         getGame().fill(255, 255, 255);
         getGame().textSize(img.height);
         getGame().text(value + "", x + img.width/2, y + img.height*0.85f);
+    }
+
+    @Override
+    public boolean isTouching(float x, float y, float w, float h) {
+        //TODO: implement rectangle collision
+        return true;
     }
 
     public float calculateWidth() {

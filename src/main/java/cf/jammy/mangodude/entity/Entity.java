@@ -2,7 +2,7 @@ package cf.jammy.mangodude.entity;
 
 import cf.jammy.mangodude.MangoDude;
 
-public class Entity {
+public abstract class Entity {
     private boolean isFixed;
     private boolean isVisible = true;
     private MangoDude game;
@@ -23,13 +23,11 @@ public class Entity {
         else render(-game.getCameraX() - game.width / 2 + x, game.getCameraY() - game.height / 2 + y);
     }
 
-    public void update() {}
+    public abstract void update();
 
-    protected void render(float x, float y) {}
+    protected abstract void render(float x, float y);
 
-    public boolean isTouching(float x, float y, float w, float h) {
-        return true;
-    }
+    public abstract boolean isTouching(float x, float y, float w, float h);
 
     public boolean isFixed() {
         return isFixed;

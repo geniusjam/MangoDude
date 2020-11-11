@@ -23,6 +23,12 @@ public class TextEntity extends Entity {
         getGame().text(text, x, y);
     }
 
+    @Override
+    public boolean isTouching(float x, float y, float w, float h) {
+        //TODO: Implement collision
+        return true;
+    }
+
     public String getText() {
         return text;
     }
