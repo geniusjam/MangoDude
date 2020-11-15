@@ -37,5 +37,5 @@ public class Controller extends Entity implements KeyboardListener {
 
     protected void render(float x, float y) {}
 
-    public boolean isTouching(float x, float y, float w, float h) { return true; }
+    public boolean isTouching(float x, float y, float w, float h) { return false; }
 }
