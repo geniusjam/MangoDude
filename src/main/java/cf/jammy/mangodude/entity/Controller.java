@@ -33,12 +33,9 @@ public class Controller extends Entity implements KeyboardListener {
         }
     }
 
-    @Override
     public void update() {}
 
-    @Override
     protected void render(float x, float y) {}
 
-    @Override
     public boolean isTouching(float x, float y, float w, float h) { return true; }
 }

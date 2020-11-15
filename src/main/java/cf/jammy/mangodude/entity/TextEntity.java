@@ -2,9 +2,11 @@ package cf.jammy.mangodude.entity;
 
 import cf.jammy.mangodude.MangoDude;
 
-public class TextEntity extends Entity {
+public class TextEntity extends RectangularEntity {
     private String text;
     private int color = 0xFFFFFF;
+
+    private static int textSize = 16;
 
     public TextEntity(boolean f, MangoDude g, String text, float x, float y) {
         super(f, g);
@@ -13,20 +15,20 @@ public class TextEntity extends Entity {
         this.y = y;
     }
 
-    @Override
     public void update() {}
 
-    @Override
     protected void render(float x, float y) {
         getGame().fill(color);
-        getGame().textSize(16);
+        getGame().textSize(textSize);
         getGame().text(text, x, y);
     }
 
-    @Override
-    public boolean isTouching(float x, float y, float w, float h) {
-        //TODO: Implement collision
-        return true;
+    public float getWidth() {
+        return getGame().textWidth(text);
+    }
+
+    public float getHeight() {
+        return textSize;
     }
 
     public String getText() {

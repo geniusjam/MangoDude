@@ -4,7 +4,7 @@ import cf.jammy.mangodude.MangoDude;
 import processing.core.PConstants;
 import processing.core.PImage;
 
-public class Holder extends Entity {
+public class Holder extends RectangularEntity {
     private PImage img;
     public int value = 0;
 
@@ -13,10 +13,8 @@ public class Holder extends Entity {
         this.img = img;
     }
 
-    @Override
     public void update() {}
 
-    @Override
     public void render(float x, float y) {
         getGame().noStroke();
         getGame().ellipseMode(PConstants.CENTER);
@@ -30,10 +28,12 @@ public class Holder extends Entity {
         getGame().text(value + "", x + img.width/2, y + img.height*0.85f);
     }
 
-    @Override
-    public boolean isTouching(float x, float y, float w, float h) {
-        //TODO: implement rectangle collision
-        return true;
+    public float getWidth() {
+        return x + img.width * 2.5f + x + img.width;
+    }
+
+    public float getHeight() {
+        return img.height;
     }
 
     public float calculateWidth() {

@@ -6,7 +6,6 @@ import processing.core.PImage;
 public class Floor extends ImageEntity {
     public Floor(MangoDude game, PImage img, float x, float y) { super(false, game, img, x, y); }
 
-    @Override
     protected void render(float x, float y) {
         super.render(this.x, y);
 

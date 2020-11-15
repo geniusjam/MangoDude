@@ -4,7 +4,7 @@ import cf.jammy.mangodude.Main;
 import cf.jammy.mangodude.MangoDude;
 import processing.core.PImage;
 
-public class Player extends Entity {
+public class Player extends RectangularEntity {
     public static final PImage img = Main.getImg("BillyWithHat.png");
     public static final PImage imgLeft = img.copy();
     protected float xspeed = 0;
@@ -25,7 +25,6 @@ public class Player extends Entity {
         this.y = y;
     }
 
-    @Override
     public void update() {
         this.x += xspeed;
         this.y += yspeed;
@@ -34,18 +33,23 @@ public class Player extends Entity {
         if(xspeed > 0) lookingLeft = false;
     }
 
-    @Override
     public void render(float x, float y) {
-
         if(lookingLeft)
             getGame().image(imgLeft, x, y);
         else
             getGame().image(img, x, y);
     }
 
-    @Override
     public boolean isTouching(float x, float y, float w, float h) {
         //TODO: implement rectangle collision
         return true;
+    }
+
+    public float getWidth() {
+        return img.width;
+    }
+
+    public float getHeight() {
+        return img.height;
     }
 }
