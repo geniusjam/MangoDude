@@ -1,5 +1,5 @@
 # MangoDude
-A WIP project
+A discontinued project
 
 ------------
 
